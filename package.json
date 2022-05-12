@@ -1,0 +1,36 @@
+{
+  "name": "esusu_backend_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server",
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoyosoreCodes/esusu_backend_task.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Festus-Olaleye Moyosore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoyosoreCodes/esusu_backend_task/issues"
+  },
+  "homepage": "https://github.com/MoyosoreCodes/esusu_backend_task#readme",
+  "dependencies": {
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "mongoose": "^6.3.3",
+    "morgan": "^1.10.0"
+  },
+  "engines": {
+    "node": "17.x"
+  }
+}
