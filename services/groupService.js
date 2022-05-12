@@ -62,10 +62,10 @@ const addUserToGroup = async (group_id, username) => {
         foundGroup.save();
 
         return { 
-            status: isMemberStatus.succes ? 200 : 400, 
-            message: isMemberStatus.succes ? `${newMemberData.username} added to a group: ${foundGroup.group_id}` : `could not add ${newMemberData.username} to ${foundGroup.group_id}` 
+            status: isMemberStatus.success ? 200 : 400, 
+            message: isMemberStatus.success ? `${newMemberData.username} added to a group: ${foundGroup.group_id}` : `could not add ${newMemberData.username} to ${foundGroup.group_id}` 
         }
-        
+
     } catch (error) {
         console.log(error);
         return { status: 500, message: `server error: ${error.message}` }; 
