@@ -1,4 +1,4 @@
 {
     "dbURI":"mongodb+srv://Moyosore:Moyosore12@cluster0.ky9jk.mongodb.net/esusu?retryWrites=true&w=majority",
-    "url": ""
+    "url": "http://localhost:5000/api/groups/join?group_id="
 }

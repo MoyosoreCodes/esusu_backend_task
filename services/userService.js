@@ -1,4 +1,4 @@
-import User from '../models/userModel';
+import User from '../models/userModel.js';
 
 /**
  * * adds new user to the database
@@ -9,12 +9,19 @@ const create = async (data) => {
         if(Object.values(data).includes('') || Object.values(data).includes(' ') || !Object.keys(data).length) {
             return { status: 400, message: "Please fill up all fields" }
         }
+        const {username} = data;
+        const existingUser = await User.findOne({username});
+        if(existingUser) return { status: 400, message: "User already exists"}
         const newUser = new User(data);
         newUser.save();
-        return { status:201, message: `User created successfully` };
+        return { 
+            status:newUser ? 201: 400, 
+            message: newUser ? `User created successfully`: "could not create user", 
+            data: newUser
+        };
     } catch (error) {
         console.log(error);
-        return { status: 500, message: 'error creating user' }
+        return { status: 500, message: `error creating user: ${error.message}` };
     }
 }
 
@@ -24,7 +31,7 @@ const create = async (data) => {
  */
 const getUser = async (query) => {
     try {
-        const foundUser = await User.findOne({query});
+        const foundUser = await User.findOne(query);
         return { 
             status: foundUser ? 200 : 404, 
             message: foundUser ? "Successfully retrieved user" : "Unable to retrieve user",

@@ -1,4 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const userObject = {
     fullname: {type: String,trim: true, required: [true,'please provide name']},

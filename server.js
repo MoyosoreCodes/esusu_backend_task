@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
-import userRoutes from './routes/users';
-import groupRoutes from './routes/groups';
+import userRoutes from './routes/users.js';
+import groupRoutes from './routes/groups.js';
 dotenv.config();
 
 const app = express();
@@ -23,20 +23,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', userRoutes); //users
 app.use('/api/groups', groupRoutes); //profile
 
-app.get('')
+app.get('/', (req, res) => { return res.json("api running") })
 
 // not found
 app.use((req, res, next) => {
-	const err = new Error(`url: ${req.url} not found`);
-    // adding new error property status
-	err.status = 404;
-    // calling next middleware function
-	next(err);
+	if (req.accepts('json')) {
+		res.status(404).send({ status: 404, error: `${req.hostname + req.url} Not found`});
+		return;
+	}
 });
 
 //other stuff
 app.use((err, req, res) => {
-	res.status(err.status || 500).json({
+	res.status(500).json({
+		status: 500, 
 		error: err.message
 	})
 });

@@ -1,7 +1,8 @@
-import mongoose, { Schema , Types } from 'mongoose';
+import mongoose from 'mongoose';
 import config from 'config';
 import moment from 'moment';
 const url = config.get('url');
+const { Schema , Types } = mongoose;
 
 // group types
 export const groupTypes = {
@@ -34,16 +35,29 @@ var setGroupLink = function(group_id) {
 }
 
 var addMember = function (member) {
+    let response = {}
     try {
         const {_id, username} = member;
-        if(this.members.length > this.capacity) throw new Error(`Group: ${ this.group_id } is full`);
-        if(this.members.includes(_id)) throw new Error(`Group:`)
+        if(this.members.length >= this.capacity) {
+            response.message =`Group ${ this.group_id } is full`;
+            throw new Error(response.message);
+        }
+        if(this.members.includes(_id)) {
+            response.message = `${username} already in group`;
+            throw new Error(response.message);
+        }
         this.members.push(_id);
-        this.savings[username] = 0;
-        const memberAdded = this.members.includes(_id);
-        return memberAdded;
+        // this.savings[username] = 0;
+        memberAdded = this.members.includes(_id);
+        // `${newMemberData.username} added to a group: ${foundGroup.group_id}`
+        response.success = true;
+        response.message = `${username} added to a group: ${this.group_id}`;
     } catch (error) {
-        return error
+        console.log(error);
+        response.success = false;
+        response.message = error.message || error;
+    }finally {
+        return response;
     }
 }
 
@@ -60,7 +74,7 @@ const groupModel = {
     name: {type: String, required: true, index: true}, // group name
     capacity: {type: Number, required: true}, // maximum capacity for group
     description: {type: String},
-    type: {type: String, default: groupTypes.PRIVATE}, // sets group visibility
+    type: {type: String, default: groupTypes.PUBLIC}, // sets group visibility
     owner: {type: Types.ObjectId, ref: 'users'}, // group admin
     members: [{type: Types.ObjectId, ref: 'users'}], // contains a list of all members
     // maps users to the amount they have saved

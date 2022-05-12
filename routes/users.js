@@ -1,9 +1,9 @@
 import express from 'express';
-import * as userService from '../services/userService';
+import * as userService from '../services/userService.js';
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { status, message } = await userService.create(req.body);
         return res.status(status).json({status, message});        
