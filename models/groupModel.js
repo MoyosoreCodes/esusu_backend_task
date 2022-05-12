@@ -48,7 +48,7 @@ var addMember = function (member) {
         }
         this.members.push(_id);
         // this.savings[username] = 0;
-        memberAdded = this.members.includes(_id);
+        // memberAdded = this.members.includes(_id);
         // `${newMemberData.username} added to a group: ${foundGroup.group_id}`
         response.success = true;
         response.message = `${username} added to a group: ${this.group_id}`;
