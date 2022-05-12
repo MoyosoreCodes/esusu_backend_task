@@ -136,7 +136,7 @@ const getSavingsData = async (owner, group_id) => {
 
         return {
             status: foundGroup ? 200 : 404,
-            message: foundGroup ? `Successfully retrieved group: ${group_id} saving info` : "Couldn't retrieve group: ${group_id} savings info",
+            message: foundGroup ? `Successfully retrieved group: ${group_id} saving info` : `Couldn't retrieve group: ${group_id} savings info`,
             data: {members: foundGroup?.members, savings: foundGroup?.savings}
         }
         
