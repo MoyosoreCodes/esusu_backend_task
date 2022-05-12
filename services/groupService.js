@@ -97,10 +97,14 @@ const getGroupById = async (group_id) => {
  * * get all groups
  * @param {object} filter 
  */
-const getGroups = async () => {
+const getGroups = async (type) => {
     try {   
+        type = type?.toUpperCase();
+        if(!type) return{ status: 400, message: `group type not provided`}
         // filter = filter || {type: groupTypes.PUBLIC}
-        const allGroups = await Group.find({})
+        if (!Object.keys(groupTypes).includes(type)) return {status: 400, message:`invalid group type requested: ${type}`}
+        const query = {type} || {type: groupTypes.PUBLIC}
+        const allGroups = await Group.find(query)
             .sort({createdAt: -1})
             .populate({path: 'owner', select: 'username fullname ', model: 'User'})
             .populate({path: 'members', select: 'username  fullname', model: 'User'})

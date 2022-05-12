@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const {status, message, data} = await groupService.getGroups();
+        const {type} = req.query
+        const {status, message, data} = await groupService.getGroups(type);
         return res.status(status).json({status, message, data});        
     } catch (error) {
         console.log(error);
