@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', userRoutes); //users
 app.use('/api/groups', groupRoutes); //profile
 app.get('/', (req, res) => { 
-    res.send(`esusu Api running, click <a href='https://documenter.getpostman.com/view/12993294/UV5TGfgL#aaa18ef5-89b6-4640-8760-2dd43ffe84b2'> here for documentation </a> `)
+    res.send(`esusu Api running, click <a href='https://documenter.getpostman.com/view/12993294/UyxhmmyR'> here for documentation </a> `)
  })
 
 // not found
