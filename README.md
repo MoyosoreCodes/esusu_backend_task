@@ -1,9 +1,8 @@
 # esusu_backend_task
 
 ---
-displayName: Esusu Api
-description: Solution to esusu backend task
-labels: ['node.js', 'express', 'API', 'Heroku']
+## Esusu Api
+### Solution to esusu backend task
 ---
 
 # live api link [here](https://esusu-api-dev.herokuapp.com/)
